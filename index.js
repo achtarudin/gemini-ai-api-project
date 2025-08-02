@@ -78,13 +78,13 @@ app.post("/generate-from-audio", upload.single("audio"), async (req, res) => {
     if (!file) {
       return res.status(400).json({ message: "File 'audio' harus di-upload!" });
     }
-    const imgBase64 = file.buffer.toString("base64");
+    const audioBase64 = file.buffer.toString("base64");
 
     const response = await ai.models.generateContent({
       model: DEFAULT_GEMINI_MODEL,
       contents: [
         { text: prompt },
-        { inlineData: { mimeType: file.mimetype, data: imgBase64 } },
+        { inlineData: { mimeType: file.mimetype, data: audioBase64 } },
       ],
     });
 
